@@ -5,14 +5,18 @@ import apiKey from './config';
 import loadingSpinner from './loadingSpinner.gif';
 
 // Components
+import Header from './components/Header';
+import SearchForm from './components/SearchForm';
+import MainNav from './components/MainNav';
 import PhotoContainer from './components/PhotoContainer';
+import Footer from './components/Footer';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isLoading: false,
+      isLoading: true,
       isError: false,
       searchQuery: '',
       searchData: [],
@@ -32,17 +36,20 @@ export default class App extends Component {
       const zenFetch = axios.get(zenRequest);
       const codingFetch = axios.get(codingRequest);
 
-      axios.all([catFetch, zenFetch, codingFetch]).then(
-        axios.spread((...responses) => {
-          this.setState({
-            galleryData: {
-              catPhotos: responses[0].data.photos.photo,
-              zenPhotos: responses[1].data.photos.photo,
-              codingPhotos: responses[2].data.photos.photo,
-            },
-          });
-        })
-      );
+      axios
+        .all([catFetch, zenFetch, codingFetch])
+        .then(
+          axios.spread((...responses) => {
+            this.setState({
+              galleryData: {
+                catPhotos: responses[0].data.photos.photo,
+                zenPhotos: responses[1].data.photos.photo,
+                codingPhotos: responses[2].data.photos.photo,
+              },
+            });
+          })
+        )
+        .then(this.setState({ isLoading: false }));
     };
 
     // Query comes in from form
@@ -72,15 +79,12 @@ export default class App extends Component {
   componentDidMount() {
     document.title = 'React Flickr Page';
     this.fetchData();
-    this.searchTags('las vegas');
   }
-  componentDidUpdate() {}
+
   render() {
     return (
       <div className='container'>
         <h1>Welcome</h1>
-
-        <PhotoContainer flickrData={this.state.galleryData.catPhotos} />
 
         <button onClick={this.searchTags}>Click Me For Test</button>
 
@@ -91,10 +95,11 @@ export default class App extends Component {
             <img src={loadingSpinner} alt='Loading Screen Animation'></img>
           </>
         ) : (
-          <h1>LOADED...LOADED!</h1>
+          <PhotoContainer flickrData={this.state.galleryData.catPhotos} />
         )}
         {/* Nothing if no error */}
         {!this.state.isError ? <h1>NO ERROR</h1> : <h1>BIG ERROR!</h1>}
+        <Footer />
       </div>
     );
   }

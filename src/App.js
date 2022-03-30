@@ -61,6 +61,8 @@ export default class App extends Component {
         ) : (
           <h1>LOADED...LOADED!</h1>
         )}
+
+        {!this.state.isError ? <h1>NO ERROR</h1> : <h1>BIG ERROR!</h1>}
       </div>
     );
   }

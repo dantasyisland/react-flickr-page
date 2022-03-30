@@ -12,47 +12,72 @@ export default class App extends Component {
       isLoading: false,
       isError: false,
       searchQuery: '',
-      data: [],
+      searchData: [],
+      galleryData: {
+        catPhotos: [],
+        zenPhotos: [],
+        codingPhotos: [],
+      },
+    };
+
+    this.fetchData = () => {
+      let catRequest = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=cats&per_page=24&format=json&nojsoncallback=1`;
+      let zenRequest = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=zen&per_page=24&format=json&nojsoncallback=1`;
+      let codingRequest = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=coding&per_page=24&format=json&nojsoncallback=1`;
+
+      const catFetch = axios.get(catRequest);
+      const zenFetch = axios.get(zenRequest);
+      const codingFetch = axios.get(codingRequest);
+
+      axios.all([catFetch, zenFetch, codingFetch]).then(
+        axios.spread((...responses) => {
+          this.setState({
+            galleryData: {
+              catPhotos: responses[0].data.photos.photo,
+              zenPhotos: responses[1].data.photos.photo,
+              codingPhotos: responses[2].data.photos.photo,
+            },
+          });
+        })
+      );
     };
 
     // Query comes in from form
-    this.fetchData = (query) => {
+    this.searchTags = (query) => {
       this.setState({ searchQuery: query });
       const getPics = async () => {
         this.setState({ isLoading: true });
         this.setState({ isError: false });
-        console.log('clicked');
 
         try {
           const result = await axios(
             `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=${this.searchQuery}&per_page=24&format=json&nojsoncallback=1`
           );
-          this.setState({ data: result.data.photos.photo });
+          this.setState({ searchData: result.data.photos.photo });
           this.setState({ isLoading: false });
-          console.log(this.state.data, this.state.isLoading);
         } catch (error) {
           this.setState({ isError: true });
           this.setState({ isLoading: false });
-          console.log();
+          console.error(error);
         }
       };
 
       getPics();
-
-      //synthetic base event
-      console.log(query);
     };
   }
 
   componentDidMount() {
     document.title = 'React Flickr Page';
+    this.fetchData();
+    this.searchTags('las vegas');
   }
   render() {
     return (
       <div className='container'>
         <h1>Welcome</h1>
-        <button onClick={this.fetchData}>Click Me For Test</button>
+        <button onClick={this.searchTags}>Click Me For Test</button>
 
+        {/* Will display component */}
         {this.state.isLoading ? (
           <>
             <h1>Loading</h1>{' '}
@@ -61,7 +86,7 @@ export default class App extends Component {
         ) : (
           <h1>LOADED...LOADED!</h1>
         )}
-
+        {/* Nothing if no error */}
         {!this.state.isError ? <h1>NO ERROR</h1> : <h1>BIG ERROR!</h1>}
       </div>
     );

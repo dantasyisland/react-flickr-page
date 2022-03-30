@@ -4,6 +4,9 @@ import apiKey from './config';
 
 import loadingSpinner from './loadingSpinner.gif';
 
+// Components
+import PhotoContainer from './components/PhotoContainer';
+
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -71,10 +74,14 @@ export default class App extends Component {
     this.fetchData();
     this.searchTags('las vegas');
   }
+  componentDidUpdate() {}
   render() {
     return (
       <div className='container'>
         <h1>Welcome</h1>
+
+        <PhotoContainer flickrData={this.state.galleryData.catPhotos} />
+
         <button onClick={this.searchTags}>Click Me For Test</button>
 
         {/* Will display component */}

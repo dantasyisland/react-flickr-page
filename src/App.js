@@ -18,7 +18,6 @@ export default class App extends Component {
     this.state = {
       isLoading: true,
       isError: false,
-      searchQuery: '',
       searchData: [],
       galleryData: {
         catPhotos: [],
@@ -54,14 +53,12 @@ export default class App extends Component {
 
     // Query comes in from form
     this.searchTags = (query) => {
-      this.setState({ searchQuery: query });
       const getPics = async () => {
         this.setState({ isLoading: true });
         this.setState({ isError: false });
-
         try {
           const result = await axios(
-            `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=${this.searchQuery}&per_page=24&format=json&nojsoncallback=1`
+            `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=${query}&per_page=24&format=json&nojsoncallback=1`
           );
           this.setState({ searchData: result.data.photos.photo });
           this.setState({ isLoading: false });
@@ -88,6 +85,8 @@ export default class App extends Component {
 
         <button onClick={this.searchTags}>Click Me For Test</button>
 
+        <SearchForm searchTags={this.searchTags} />
+
         {/* Will display component */}
         {this.state.isLoading ? (
           <>
@@ -95,7 +94,7 @@ export default class App extends Component {
             <img src={loadingSpinner} alt='Loading Screen Animation'></img>
           </>
         ) : (
-          <PhotoContainer flickrData={this.state.galleryData.catPhotos} />
+          <PhotoContainer flickrData={this.state.searchData} />
         )}
         {/* Nothing if no error */}
         {!this.state.isError ? <h1>NO ERROR</h1> : <h1>BIG ERROR!</h1>}

@@ -83,8 +83,6 @@ export default class App extends Component {
       <div className='container'>
         <h1>Welcome</h1>
 
-        <button onClick={this.searchTags}>Click Me For Test</button>
-
         <SearchForm searchTags={this.searchTags} />
 
         {/* Will display component */}

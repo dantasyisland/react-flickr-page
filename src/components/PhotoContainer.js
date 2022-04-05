@@ -1,7 +1,7 @@
 import React from 'react';
 import Photo from './Photo';
 
-export default function PhotoContainer({ flickrData }) {
+export default function PhotoContainer({flickrData}) {
   let photos = flickrData.map((flickrPic) => {
     return (
       <Photo

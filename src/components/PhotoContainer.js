@@ -1,8 +1,10 @@
 import React from 'react';
 import Photo from './Photo';
+import loadingSpinner from '../loadingSpinner.gif'
 
-export default function PhotoContainer({flickrData}) {
-  let photos = flickrData.map((flickrPic) => {
+
+export default function PhotoContainer({flickrData, isLoading, isError, match}) {
+  let photos = flickrData.catPhotos.map((flickrPic) => {
     return (
       <Photo
         id={flickrPic.id}
@@ -17,7 +19,12 @@ export default function PhotoContainer({flickrData}) {
   return (
     <div className='photo-container'>
       <h2>Results - Change this to reflect name</h2>
-      <ul>{photos}</ul>
+
+      {isLoading ? <>
+        <h1>Loading</h1>{' '}
+        <img src={loadingSpinner} alt='Loading Screen Animation'></img>
+      </> : <ul>{photos}</ul>}
+      {!isError ? <h1>NO ERROR</h1> : <h1>BIG ERROR!</h1>}
     </div>
   );
 }

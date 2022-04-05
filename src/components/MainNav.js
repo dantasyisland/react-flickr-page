@@ -1,19 +1,17 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
 
-export default function MainNav({data}) {
-  console.log(data)
+export default function MainNav() {
   return (
     <nav className='main-nav'>
       <ul>
         <li>
-          <NavLink to={'/cats'}>Cats</NavLink>
+          <a href='#'>Cats</a>
         </li>
         <li>
-          <NavLink to={'/zen'}>Zen</NavLink>
+          <a href='#'>Coding</a>
         </li>
         <li>
-          <NavLink to={'/coding'}>Coding</NavLink>
+          <a href='#'>Zen</a>
         </li>
       </ul >
     </nav >

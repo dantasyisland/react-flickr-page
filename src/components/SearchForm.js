@@ -15,7 +15,6 @@ export default class SearchForm extends Component {
 
     this.onSubmit = e => {
       e.preventDefault();
-      console.log('works');
       this.props.searchTags(this.state.searchText)
 
     }

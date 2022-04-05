@@ -3,8 +3,8 @@ import Photo from './Photo';
 import loadingSpinner from '../loadingSpinner.gif'
 
 
-export default function PhotoContainer({flickrData, isLoading, isError, match}) {
-  let photos = flickrData.catPhotos.map((flickrPic) => {
+export default function PhotoContainer({flickrData, isLoading, isError}) {
+  let photos = flickrData.map((flickrPic) => {
     return (
       <Photo
         id={flickrPic.id}
@@ -18,7 +18,7 @@ export default function PhotoContainer({flickrData, isLoading, isError, match}) 
 
   return (
     <div className='photo-container'>
-      <h2>Results - Change this to reflect name</h2>
+      <h2>Pictures of:</h2>
 
       {isLoading ? <>
         <h1>Loading</h1>{' '}

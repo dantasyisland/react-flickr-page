@@ -79,7 +79,7 @@ export default class App extends Component {
         <BrowserRouter>
           <MainNav data={this.state.galleryData} />
           <SearchForm searchTags={this.searchTags} />
-
+          {/* TEST */}
           <Route exact path="/" render={() =>
             <PhotoContainer flickrData={this.state.galleryData.zenPhotos} isLoading={this.state.isLoading} />
           } />

@@ -83,6 +83,9 @@ export default class App extends Component {
           <Route exact path="/" render={() =>
             <PhotoContainer flickrData={this.state.galleryData.zenPhotos} isLoading={this.state.isLoading} />
           } />
+          <Route path="/test">
+            <PhotoContainer flickrData={this.state.galleryData.searchData} />
+          </Route>
           <Route exact path="/cats" render={() => <PhotoContainer flickrData={this.state.galleryData.catPhotos} isLoading={this.state.isLoading} />} />
           <Route exact path="/coding" render={() => <PhotoContainer flickrData={this.state.galleryData.codingPhotos} isLoading={this.state.isLoading} />} />
           <Route exact path="/zen" render={() => <PhotoContainer flickrData={this.state.galleryData.zenPhotos} isLoading={this.state.isLoading} />} />

@@ -7,6 +7,9 @@ import SearchForm from './components/SearchForm';
 import MainNav from './components/MainNav';
 import PhotoContainer from './components/PhotoContainer';
 
+// Router
+import {BrowserRouter, Route} from 'react-router-dom';
+
 
 export default class App extends Component {
   constructor(props) {
@@ -30,7 +33,7 @@ export default class App extends Component {
           const result = await axios(
             `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=${query}&per_page=24&format=json&nojsoncallback=1`
           );
-          this.setState({galleryData: {...this.state.galleryData, searchData: result.data.photos.photo}});
+          this.setState({galleryData: {searchData: result.data.photos.photo}});
           this.setState({isLoading: false});
         } catch (error) {
           this.setState({isError: true});
@@ -46,14 +49,23 @@ export default class App extends Component {
     this.searchTags('cats');
   }
 
+
   render() {
     return (
 
       <div className='container'>
 
-        <SearchForm searchTags={this.searchTags} query={this.state.query} />
+        {/* A navlink calling the searchTags functioN!!!!!!! */}
+
+        <SearchForm searchTags={this.searchTags} />
         <MainNav />
-        <PhotoContainer isLoading={this.state.isLoading} flickrData={this.state.galleryData.searchData} query={this.state.query} />
+
+
+        <BrowserRouter>
+          <Route exact path="/dogs">
+            <PhotoContainer isLoading={this.state.isLoading} flickrData={this.state.galleryData.searchData} query={this.state.query} />
+          </Route>
+        </BrowserRouter>
       </div>
     );
   }

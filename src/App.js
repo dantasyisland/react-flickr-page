@@ -15,36 +15,11 @@ export default class App extends Component {
       isLoading: true,
       isError: false,
       galleryData: {
-        // catPhotos: [],
-        // zenPhotos: [],
-        // codingPhotos: [],
         searchData: [],
       },
       query: "cats",
     };
-    // this.fetchData = () => {
-    //   let catRequest = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=cats&per_page=24&format=json&nojsoncallback=1`;
-    //   let zenRequest = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=zen&per_page=24&format=json&nojsoncallback=1`;
-    //   let codingRequest = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=coding&per_page=24&format=json&nojsoncallback=1`;
-    //   const catFetch = axios.get(catRequest);
-    //   const zenFetch = axios.get(zenRequest);
-    //   const codingFetch = axios.get(codingRequest);
-    //   axios
-    //     .all([catFetch, zenFetch, codingFetch])
-    //     .then(
-    //       axios.spread((...responses) => {
-    //         this.setState({
-    //           galleryData: {
-    //             catPhotos: responses[0].data.photos.photo,
-    //             zenPhotos: responses[1].data.photos.photo,
-    //             codingPhotos: responses[2].data.photos.photo,
-    //             searchData: [],
-    //           },
-    //         });
-    //       })
-    //     )
-    //     .then(this.setState({isLoading: false}));
-    // };
+
     // Query comes in from form
     this.searchTags = (query) => {
       this.setState({query})

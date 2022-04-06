@@ -16,6 +16,7 @@ export default function PhotoContainer({flickrData, isLoading, isError, query}) 
     );
   });
 
+
   return (
     <div className='photo-container'>
       <h2>Pictures of: {query}</h2>
@@ -24,6 +25,7 @@ export default function PhotoContainer({flickrData, isLoading, isError, query}) 
         <h1>Loading</h1>{' '}
         <img src={loadingSpinner} alt='Loading Screen Animation'></img>
       </> : <ul>{photos}</ul>}
+
       {!isError ? <h1>NO ERROR</h1> : <h1>BIG ERROR!</h1>}
     </div>
   );

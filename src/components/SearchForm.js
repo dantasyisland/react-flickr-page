@@ -23,7 +23,6 @@ export default class SearchForm extends Component {
   render() {
     return (
       <div>
-        <h1>Serach form works - add icons - delete this div</h1>
         <form className="search-form" onSubmit={this.onSubmit} >
           <input type="search"
             onChange={this.onSearchChange}

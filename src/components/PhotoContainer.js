@@ -1,9 +1,11 @@
 import React from 'react';
 import Photo from './Photo';
 import loadingSpinner from '../loadingSpinner.gif'
+import {withRouter} from 'react-router-dom';
 
 
-export default function PhotoContainer({flickrData, isLoading, isError, query}, {match}) {
+function PhotoContainer({flickrData, isLoading, isError, query, match}) {
+  console.dir(match);
   let photos = flickrData.map((flickrPic) => {
     return (
       <Photo
@@ -19,7 +21,7 @@ export default function PhotoContainer({flickrData, isLoading, isError, query}, 
 
   return (
     <div className='photo-container'>
-      <h2>Pictures of: {query}</h2>
+      <h2>Pictures of: {match.path}</h2>
 
       {isLoading ? <>
         <h1>Loading</h1>{' '}
@@ -30,3 +32,5 @@ export default function PhotoContainer({flickrData, isLoading, isError, query}, 
     </div>
   );
 }
+
+export default withRouter(PhotoContainer);

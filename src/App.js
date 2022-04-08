@@ -8,6 +8,7 @@ import MainNav from './components/MainNav';
 import PhotoContainer from './components/PhotoContainer';
 import { BrowserRouter } from 'react-router-dom';
 import { Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 
 export default class App extends Component {
   constructor(props) {
@@ -55,41 +56,44 @@ export default class App extends Component {
   render() {
     return (
       <div className='container'>
+        <SearchForm searchTags={this.searchTags} query={this.state.query} />
         <BrowserRouter>
-          <SearchForm searchTags={this.searchTags} query={this.state.query} />
           <MainNav />
-          <Route
-            path='/cats'
-            render={() => (
-              <PhotoContainer
-                isLoading={this.state.isLoading}
-                flickrData={this.state.galleryData.searchData}
-                query={this.state.query}
-              />
-            )}
-          />
+          <Switch>
+            <Route exact path='/' />
+            <Route
+              path='/cats'
+              component={() => (
+                <PhotoContainer
+                  isLoading={this.state.isLoading}
+                  flickrData={this.state.galleryData.searchData}
+                  query={this.state.query}
+                />
+              )}
+            />
 
-          <Route
-            path='/coding'
-            render={() => (
-              <PhotoContainer
-                isLoading={this.state.isLoading}
-                flickrData={this.state.galleryData.searchData}
-                query={this.state.query}
-              />
-            )}
-          />
+            <Route
+              path='/coding'
+              render={() => (
+                <PhotoContainer
+                  isLoading={this.state.isLoading}
+                  flickrData={this.state.galleryData.searchData}
+                  query={this.state.query}
+                />
+              )}
+            />
 
-          <Route
-            path='/zen'
-            render={(props) => (
-              <PhotoContainer
-                isLoading={this.state.isLoading}
-                flickrData={this.state.galleryData.searchData}
-                query={this.state.query}
-              />
-            )}
-          />
+            <Route
+              path='/zen'
+              render={(props) => (
+                <PhotoContainer
+                  isLoading={this.state.isLoading}
+                  flickrData={this.state.galleryData.searchData}
+                  query={this.state.query}
+                />
+              )}
+            />
+          </Switch>
         </BrowserRouter>
       </div>
     );

@@ -1,8 +1,11 @@
 import React, {Component} from 'react'
 import {MdImageSearch} from 'react-icons/md'
-export default class SearchForm extends Component {
+import {withRouter} from 'react-router-dom';
+
+class SearchForm extends Component {
   constructor(props) {
     super(props);
+
 
     this.state = {
       searchText: '',
@@ -15,9 +18,15 @@ export default class SearchForm extends Component {
 
     this.onSubmit = e => {
       e.preventDefault();
+      //url
+      let path = `results/${this.state.searchText}`;
       this.props.searchTags(this.state.searchText)
-
+      this.props.history.push(path);
     }
+  }
+
+  componentDidMount() {
+    this.props.searchTags(this.props.match.params)
   }
 
   render() {
@@ -34,3 +43,5 @@ export default class SearchForm extends Component {
     )
   }
 }
+
+export default withRouter(SearchForm)

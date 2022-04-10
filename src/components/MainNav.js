@@ -6,13 +6,13 @@ export default function MainNav() {
     <nav className='main-nav'>
       <ul>
         <li>
-          <NavLink to="/cats">Cats</NavLink>
+          <NavLink to="results/cats">Cats</NavLink>
         </li>
         <li>
-          <NavLink to="/coding">Coding</NavLink>
+          <NavLink to="results/coding">Coding</NavLink>
         </li>
         <li>
-          <NavLink to="/zen">Zen</NavLink>
+          <NavLink to="results/zen">Zen</NavLink>
         </li>
       </ul >
     </nav >

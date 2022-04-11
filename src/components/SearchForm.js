@@ -19,7 +19,7 @@ class SearchForm extends Component {
     this.onSubmit = e => {
       e.preventDefault();
       //url
-      let path = `results/${this.state.searchText}`;
+      let path = `/results/${this.state.searchText}`;
       this.props.searchTags(this.state.searchText)
       this.props.history.push(path);
     }

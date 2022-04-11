@@ -4,7 +4,7 @@ import loadingSpinner from '../loadingSpinner.gif'
 import {withRouter} from 'react-router-dom';
 
 
-function PhotoContainer({flickrData, isLoading, isError, match}) {
+function PhotoContainer({flickrData, isLoading, isError, match, search}) {
   console.dir(match.params.search);
 
 

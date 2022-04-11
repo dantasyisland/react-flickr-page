@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import apiKey from './config';
 
@@ -6,9 +6,9 @@ import apiKey from './config';
 import SearchForm from './components/SearchForm';
 import MainNav from './components/MainNav';
 import PhotoContainer from './components/PhotoContainer';
-import {BrowserRouter} from 'react-router-dom';
-import {Route} from 'react-router-dom';
-import {Switch} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import NotFound from './components/NotFound';
 
 export default class Home extends Component {
@@ -25,10 +25,10 @@ export default class Home extends Component {
 
     // Query comes in from form
     this.searchTags = (query) => {
-      this.setState({query});
+      this.setState({ query });
       const getPics = async () => {
-        this.setState({isLoading: true});
-        this.setState({isError: false});
+        this.setState({ isLoading: true });
+        this.setState({ isError: false });
         try {
           const result = await axios(
             `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=${query}&per_page=24&format=json&nojsoncallback=1`
@@ -39,10 +39,10 @@ export default class Home extends Component {
               searchData: result.data.photos.photo,
             },
           });
-          this.setState({isLoading: false});
+          this.setState({ isLoading: false });
         } catch (error) {
-          this.setState({isError: true});
-          this.setState({isLoading: false});
+          this.setState({ isError: true });
+          this.setState({ isLoading: false });
           console.error(error);
         }
       };
@@ -58,7 +58,11 @@ export default class Home extends Component {
     return (
       <div className='container'>
         <BrowserRouter>
-          <MainNav />
+          <MainNav
+            searchCats={() => this.searchTags('cats')}
+            searchCoding={() => this.searchTags('coding')}
+            searchZen={() => this.searchTags('zen')}
+          />
 
           <SearchForm searchTags={this.searchTags} query={this.state.query} />
           <Switch>
@@ -69,33 +73,21 @@ export default class Home extends Component {
               />
             </Route>
 
-            <Route path='/results/:search'>
+            {/* Undefined because no match oject */}
+            <Route exact path='/cats'>
               <PhotoContainer
                 isLoading={this.state.isLoading}
                 flickrData={this.state.galleryData.searchData}
               />
             </Route>
-            <Route path='/cats'>
+
+            <Route exact path='/results/:search'>
               <PhotoContainer
                 isLoading={this.state.isLoading}
                 flickrData={this.state.galleryData.searchData}
-                searchTags={this.searchTags}
               />
             </Route>
-            <Route path='/coding'>
-              <PhotoContainer
-                isLoading={this.state.isLoading}
-                flickrData={this.state.galleryData.searchData}
-                searchTags={this.searchTags}
-              />
-            </Route>
-            <Route path='/zen'>
-              <PhotoContainer
-                isLoading={this.state.isLoading}
-                flickrData={this.state.galleryData.searchData}
-                searchTags={this.searchTags}
-              />
-            </Route>
+
             <Route>
               <NotFound />
             </Route>

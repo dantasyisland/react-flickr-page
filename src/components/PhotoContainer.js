@@ -10,6 +10,7 @@ function PhotoContainer({
   match,
   location,
   history,
+  query,
 }) {
   console.log('---Match from photocontainer---');
   console.log(match);
@@ -31,7 +32,7 @@ function PhotoContainer({
 
   return (
     <div className='photo-container'>
-      <h2>Pictures of: {`${match.params.search}`}</h2>
+      <h2>Pictures of: {`${query}`}</h2>
 
       {isLoading ? (
         <>

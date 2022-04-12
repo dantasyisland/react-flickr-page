@@ -83,6 +83,7 @@ class App extends Component {
               flickrData={this.state.galleryData.searchData}
               location={this.props.location}
               history={this.props.history}
+              query={this.state.query}
             />
           </Route>
 
@@ -92,6 +93,7 @@ class App extends Component {
             <PhotoContainer
               isLoading={this.state.isLoading}
               flickrData={this.state.galleryData.searchData}
+              query={this.state.query}
             />
           </Route>
 

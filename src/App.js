@@ -10,8 +10,11 @@ import { BrowserRouter } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import { Switch } from 'react-router-dom';
 import NotFound from './components/NotFound';
+import { withRouter } from 'react-router-dom';
 
-export default class Home extends Component {
+import Test from './Test';
+
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -54,46 +57,57 @@ export default class Home extends Component {
     this.searchTags('javascript');
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.galleryData !== this.state.galleryData) {
+      // Now fetch the new data here
+      console.log('its changed');
+    }
+  }
+
   render() {
     return (
       <div className='container'>
-        <BrowserRouter>
-          <MainNav
-            searchCats={() => this.searchTags('cats')}
-            searchCoding={() => this.searchTags('coding')}
-            searchZen={() => this.searchTags('zen')}
-          />
+        <Test match={this.props.match} history={this.props.history} />
+        <MainNav
+          searchCats={() => this.searchTags('cats')}
+          searchCoding={() => this.searchTags('coding')}
+          searchZen={() => this.searchTags('zen')}
+        />
 
-          <SearchForm searchTags={this.searchTags} query={this.state.query} />
-          <Switch>
-            <Route exact path='/'>
-              <PhotoContainer
-                isLoading={this.state.isLoading}
-                flickrData={this.state.galleryData.searchData}
-              />
-            </Route>
+        <SearchForm
+          searchTags={this.searchTags}
+          query={this.state.query}
+          match={this.props.match}
+        />
+        <Switch>
+          <Route exact path='/'>
+            <PhotoContainer
+              isLoading={this.state.isLoading}
+              flickrData={this.state.galleryData.searchData}
+            />
+          </Route>
 
-            {/* Undefined because no match oject */}
-            <Route exact path='/cats'>
-              <PhotoContainer
-                isLoading={this.state.isLoading}
-                flickrData={this.state.galleryData.searchData}
-              />
-            </Route>
+          {/* Undefined because no match oject */}
+          <Route exact path='/cats'>
+            <PhotoContainer
+              isLoading={this.state.isLoading}
+              flickrData={this.state.galleryData.searchData}
+            />
+          </Route>
 
-            <Route exact path='/results/:search'>
-              <PhotoContainer
-                isLoading={this.state.isLoading}
-                flickrData={this.state.galleryData.searchData}
-              />
-            </Route>
+          <Route exact path='/results/:search'>
+            <PhotoContainer
+              isLoading={this.state.isLoading}
+              flickrData={this.state.galleryData.searchData}
+            />
+          </Route>
 
-            <Route>
-              <NotFound />
-            </Route>
-          </Switch>
-        </BrowserRouter>
+          <Route>
+            <NotFound />
+          </Route>
+        </Switch>
       </div>
     );
   }
 }
+export default withRouter(App);

@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import apiKey from './config';
+import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
 
 // Components
 import SearchForm from './components/SearchForm';
 import MainNav from './components/MainNav';
 import PhotoContainer from './components/PhotoContainer';
-import { BrowserRouter } from 'react-router-dom';
-import { Route } from 'react-router-dom';
-import { Switch } from 'react-router-dom';
 import NotFound from './components/NotFound';
-import { withRouter } from 'react-router-dom';
-
-import Test from './Test';
 
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       isLoading: true,
       isError: false,
@@ -57,17 +53,17 @@ class App extends Component {
     this.searchTags('javascript');
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.galleryData !== this.state.galleryData) {
-      // Now fetch the new data here
-      console.log('its changed');
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState.galleryData !== this.state.galleryData) {
+  //     // Now fetch the new data here
+  //   }
+  //   console.log('its changed');
+  //   console.log(this.props.history);
+  // }
 
   render() {
     return (
       <div className='container'>
-        <Test match={this.props.match} history={this.props.history} />
         <MainNav
           searchCats={() => this.searchTags('cats')}
           searchCoding={() => this.searchTags('coding')}
@@ -78,22 +74,19 @@ class App extends Component {
           searchTags={this.searchTags}
           query={this.state.query}
           match={this.props.match}
+          history={this.props.history}
         />
         <Switch>
           <Route exact path='/'>
             <PhotoContainer
               isLoading={this.state.isLoading}
               flickrData={this.state.galleryData.searchData}
+              location={this.props.location}
+              history={this.props.history}
             />
           </Route>
 
           {/* Undefined because no match oject */}
-          <Route exact path='/cats'>
-            <PhotoContainer
-              isLoading={this.state.isLoading}
-              flickrData={this.state.galleryData.searchData}
-            />
-          </Route>
 
           <Route exact path='/results/:search'>
             <PhotoContainer

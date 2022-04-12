@@ -3,7 +3,20 @@ import Photo from './Photo';
 import loadingSpinner from '../loadingSpinner.gif';
 import { withRouter } from 'react-router-dom';
 
-function PhotoContainer({ flickrData, isLoading, isError, match, search }) {
+function PhotoContainer({
+  flickrData,
+  isLoading,
+  isError,
+  match,
+  location,
+  history,
+}) {
+  console.log('---Match from photocontainer---');
+  console.log(match);
+  console.log('---Location from photocotainer---');
+  console.log(location);
+  console.log('---History from photocotainer---');
+  console.log(history);
   let photos = flickrData.map((flickrPic) => {
     return (
       <Photo

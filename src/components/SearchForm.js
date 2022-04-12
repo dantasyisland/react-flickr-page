@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { MdImageSearch } from 'react-icons/md';
-import { withRouter } from 'react-router-dom';
 
 class SearchForm extends Component {
   constructor(props) {
@@ -23,8 +22,14 @@ class SearchForm extends Component {
     };
   }
 
-  componentDidMount() {
-    this.props.searchTags(this.props.match.params);
+  componentDidMount() {}
+
+  // What's causing this update?
+  componentDidUpdate() {
+    // console.log('History from form');
+    // console.log(this.props.history);
+    // console.log('Match from form');
+    // console.log(this.props.match);
   }
 
   render() {

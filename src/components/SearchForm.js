@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { MdImageSearch } from 'react-icons/md';
+import React, {Component} from 'react';
+import {MdImageSearch} from 'react-icons/md';
 
 class SearchForm extends Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class SearchForm extends Component {
     };
 
     this.onSearchChange = (e) => {
-      this.setState({ searchText: e.target.value });
+      this.setState({searchText: e.target.value});
     };
 
     this.onSubmit = (e) => {
@@ -20,16 +20,6 @@ class SearchForm extends Component {
       this.props.searchTags(this.state.searchText);
       this.props.history.push(path);
     };
-  }
-
-  componentDidMount() {}
-
-  // What's causing this update?
-  componentDidUpdate() {
-    // console.log('History from form');
-    // console.log(this.props.history);
-    // console.log('Match from form');
-    // console.log(this.props.match);
   }
 
   render() {

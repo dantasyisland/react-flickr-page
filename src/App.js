@@ -16,13 +16,10 @@ class App extends Component {
     this.state = {
       isLoading: true,
       isError: false,
-      galleryData: {
-        searchData: [],
-      },
-      query: 'cats',
+      galleryData: [],
+      query: '',
     };
 
-    // Query comes in from form
     this.searchTags = (query) => {
       this.setState({ query });
       const getPics = async () => {
@@ -33,10 +30,7 @@ class App extends Component {
             `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=${query}&per_page=24&format=json&nojsoncallback=1`
           );
           this.setState({
-            galleryData: {
-              ...this.state.galleryData,
-              searchData: result.data.photos.photo,
-            },
+            galleryData: result.data.photos.photo,
           });
           this.setState({ isLoading: false });
         } catch (error) {
@@ -50,16 +44,35 @@ class App extends Component {
   }
   componentDidMount() {
     document.title = 'React Flickr Page';
-    this.searchTags('javascript');
+    this.searchTags('cats');
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.galleryData !== this.state.galleryData) {
-  //     // Now fetch the new data here
-  //   }
-  //   console.log('its changed');
-  //   console.log(this.props.history);
-  // }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      //try to get prevState!!!!!!!!
+
+      let prevQuery = prevState.query;
+      let prevLocation = prevProps.location.pathname;
+      prevLocation = prevLocation.replace(/\/results\//, '');
+      let currentLocation = this.props.location.pathname;
+      currentLocation = currentLocation.replace(/\/results\//, '');
+
+      if (this.props.location.pathname === '/') {
+        console.log('ONE STEP AWAY!!!');
+        this.searchTags('cats');
+      } else {
+        this.searchTags(currentLocation);
+      }
+      // // not changing anything
+      // this.setState({ query: prevQuery });
+      // this.searchTags(this.state.query);
+
+      console.log(`PrevQuery - State: ${prevQuery}`);
+      console.log(`prevLocation: ${prevLocation}`);
+      console.log(`query: ${this.state.query}`);
+      console.log(`Current Path Name: ${this.props.location.pathname}`);
+    }
+  }
 
   render() {
     return (
@@ -70,29 +83,20 @@ class App extends Component {
           searchZen={() => this.searchTags('zen')}
         />
 
-        <SearchForm
-          searchTags={this.searchTags}
-          query={this.state.query}
-          match={this.props.match}
-          history={this.props.history}
-        />
+        <SearchForm searchTags={this.searchTags} history={this.props.history} />
         <Switch>
           <Route exact path='/'>
             <PhotoContainer
               isLoading={this.state.isLoading}
-              flickrData={this.state.galleryData.searchData}
-              location={this.props.location}
-              history={this.props.history}
+              flickrData={this.state.galleryData}
               query={this.state.query}
             />
           </Route>
 
-          {/* Undefined because no match oject */}
-
           <Route exact path='/results/:search'>
             <PhotoContainer
               isLoading={this.state.isLoading}
-              flickrData={this.state.galleryData.searchData}
+              flickrData={this.state.galleryData}
               query={this.state.query}
             />
           </Route>

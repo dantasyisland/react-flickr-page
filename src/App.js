@@ -1,13 +1,14 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import apiKey from './config';
-import {BrowserRouter, Route, Switch, withRouter} from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 
 // Components
 import SearchForm from './components/SearchForm';
 import MainNav from './components/MainNav';
 import PhotoContainer from './components/PhotoContainer';
 import NotFound from './components/NotFound';
+import Error from './components/Error';
 
 class App extends Component {
   constructor(props) {
@@ -21,10 +22,10 @@ class App extends Component {
     };
 
     this.searchTags = (query) => {
-      this.setState({query});
+      this.setState({ query });
       const getPics = async () => {
-        this.setState({isLoading: true});
-        this.setState({isError: false});
+        this.setState({ isLoading: true });
+        this.setState({ isError: false });
         try {
           const result = await axios(
             `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=${query}&per_page=24&format=json&nojsoncallback=1`
@@ -32,10 +33,10 @@ class App extends Component {
           this.setState({
             galleryData: result.data.photos.photo,
           });
-          this.setState({isLoading: false});
+          this.setState({ isLoading: false });
         } catch (error) {
-          this.setState({isError: true});
-          this.setState({isLoading: false});
+          this.setState({ isError: true });
+          this.setState({ isLoading: false });
           console.error(error);
         }
       };
@@ -49,11 +50,6 @@ class App extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.location.pathname !== this.props.location.pathname) {
-      //try to get prevState!!!!!!!!
-
-      let prevQuery = prevState.query;
-      let prevLocation = prevProps.location.pathname;
-      prevLocation = prevLocation.replace(/\/results\//, '');
       let currentLocation = this.props.location.pathname;
       currentLocation = currentLocation.replace(/\/results\//, '');
 
@@ -63,14 +59,6 @@ class App extends Component {
       } else {
         this.searchTags(currentLocation);
       }
-      // // not changing anything
-      // this.setState({ query: prevQuery });
-      // this.searchTags(this.state.query);
-
-      console.log(`PrevQuery - State: ${prevQuery}`);
-      console.log(`prevLocation: ${prevLocation}`);
-      console.log(`query: ${this.state.query}`);
-      console.log(`Current Path Name: ${this.props.location.pathname}`);
     }
   }
 
@@ -86,19 +74,27 @@ class App extends Component {
         <SearchForm searchTags={this.searchTags} history={this.props.history} />
         <Switch>
           <Route exact path='/'>
-            <PhotoContainer
-              isLoading={this.state.isLoading}
-              flickrData={this.state.galleryData}
-              query={this.state.query}
-            />
+            {!this.state.isError ? (
+              <PhotoContainer
+                isLoading={this.state.isLoading}
+                flickrData={this.state.galleryData}
+                query={this.state.query}
+              />
+            ) : (
+              <Error />
+            )}
           </Route>
 
           <Route exact path='/results/:search'>
-            <PhotoContainer
-              isLoading={this.state.isLoading}
-              flickrData={this.state.galleryData}
-              query={this.state.query}
-            />
+            {!this.state.isError ? (
+              <PhotoContainer
+                isLoading={this.state.isLoading}
+                flickrData={this.state.galleryData}
+                query={this.state.query}
+              />
+            ) : (
+              <Error />
+            )}
           </Route>
 
           <Route>

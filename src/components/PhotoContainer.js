@@ -1,7 +1,6 @@
 import React from 'react';
 import Photo from './Photo';
 import loadingSpinner from '../loadingSpinner.gif';
-import {withRouter} from 'react-router-dom';
 
 export default function PhotoContainer({
   flickrData,
@@ -23,18 +22,17 @@ export default function PhotoContainer({
 
   return (
     <div className='photo-container'>
-      <h2>Pictures of: {`${query}`}</h2>
-
       {isLoading ? (
         <>
           <h1>Loading</h1>{' '}
           <img src={loadingSpinner} alt='Loading Screen Animation'></img>
         </>
       ) : (
-        <ul>{photos}</ul>
+        <>
+          <h2>Pictures of: {`${query}`}</h2>
+          <ul>{photos}</ul>
+        </>
       )}
-
-      {!isError ? <h1>NO ERROR</h1> : <h1>BIG ERROR!</h1>}
     </div>
   );
 }

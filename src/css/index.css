@@ -81,19 +81,20 @@ input {
 
 .photo-container ul img {
   width: 100%;
-  transform: scale(1.25);
-  transition: transform 1.25s;
+  height: 100%;
+  transform: scale(1);
+  transition: transform 0.4s;
 }
 
 .photo-container li:hover img {
-  transform: scale(1.65);
+  transform: scale(1.9);
 }
 
 .photo-container .not-found {
   width: 100%;
 }
 
-@media only screen and (max-width: 767px)  {
+@media only screen and (max-width: 767px) {
   body {
     padding-top: 2em;
   }
@@ -103,7 +104,7 @@ input {
   }
 }
 
-@media only screen and (min-width: 768px)  {
+@media only screen and (min-width: 768px) {
   body {
     padding-top: 4em;
   }
@@ -117,7 +118,7 @@ input {
     display: flex;
     justify-content: center;
   }
-  
+
   .main-nav li {
     margin: 10px;
     width: 100px;

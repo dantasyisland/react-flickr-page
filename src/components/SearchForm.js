@@ -19,7 +19,6 @@ class SearchForm extends Component {
       let path = `/results/${this.state.searchText}`;
       this.props.searchTags(this.state.searchText);
       this.props.history.push(path);
-      this.setState({ searchText: '' });
     };
   }
 
@@ -33,7 +32,12 @@ class SearchForm extends Component {
             name='search'
             placeholder={`Search your heart's desire...`}
           />
-          <button type='submit' id='submit' className='search-button'>
+          <button
+            type='submit'
+            value='submit'
+            id='submit'
+            className='search-button'
+          >
             <MdImageSearch />
           </button>
         </form>

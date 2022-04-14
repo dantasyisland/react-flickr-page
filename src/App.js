@@ -65,7 +65,6 @@ class App extends Component {
   render() {
     return (
       <div className='container'>
-
         <MainNav
           searchCats={() => this.searchTags('cats')}
           searchCoding={() => this.searchTags('coding')}
@@ -97,7 +96,6 @@ class App extends Component {
               <Error />
             )}
           </Route>
-
 
           <Route>
             <NotFound />

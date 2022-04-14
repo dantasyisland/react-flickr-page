@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import axios from 'axios';
 import apiKey from './config';
-import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
+import {BrowserRouter, Route, Switch, withRouter} from 'react-router-dom';
 
 // Components
 import SearchForm from './components/SearchForm';
@@ -21,10 +21,10 @@ class App extends Component {
     };
 
     this.searchTags = (query) => {
-      this.setState({ query });
+      this.setState({query});
       const getPics = async () => {
-        this.setState({ isLoading: true });
-        this.setState({ isError: false });
+        this.setState({isLoading: true});
+        this.setState({isError: false});
         try {
           const result = await axios(
             `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=${query}&per_page=24&format=json&nojsoncallback=1`
@@ -32,10 +32,10 @@ class App extends Component {
           this.setState({
             galleryData: result.data.photos.photo,
           });
-          this.setState({ isLoading: false });
+          this.setState({isLoading: false});
         } catch (error) {
-          this.setState({ isError: true });
-          this.setState({ isLoading: false });
+          this.setState({isError: true});
+          this.setState({isLoading: false});
           console.error(error);
         }
       };

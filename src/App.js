@@ -69,7 +69,7 @@ class App extends Component {
         <MainNav
           searchCats={() => this.searchTags('cats')}
           searchCoding={() => this.searchTags('coding')}
-          searchZen={() => this.searchTags('zen')}
+          searchMeditation={() => this.searchTags('meditation')}
         />
 
         <SearchForm searchTags={this.searchTags} history={this.props.history} />

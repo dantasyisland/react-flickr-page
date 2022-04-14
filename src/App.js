@@ -49,6 +49,7 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    document.title = `React Flickr Page - ${this.state.query}`;
     if (prevProps.location.pathname !== this.props.location.pathname) {
       let currentLocation = this.props.location.pathname;
       currentLocation = currentLocation.replace(/\/results\//, '');

@@ -2,12 +2,7 @@ import React from 'react';
 import Photo from './Photo';
 import loadingSpinner from '../loadingSpinner.gif';
 
-export default function PhotoContainer({
-  flickrData,
-  isLoading,
-  isError,
-  query,
-}) {
+export default function PhotoContainer({ flickrData, isLoading, query }) {
   let photos = flickrData.map((flickrPic) => {
     return (
       <Photo

@@ -1,16 +1,18 @@
-import React, {Component} from 'react';
-import {MdImageSearch} from 'react-icons/md';
+import React, { Component } from 'react';
+import { MdImageSearch } from 'react-icons/md';
 
 class SearchForm extends Component {
   constructor(props) {
     super(props);
+
+    this.textInput = React.createRef();
 
     this.state = {
       searchText: '',
     };
 
     this.onSearchChange = (e) => {
-      this.setState({searchText: e.target.value});
+      this.setState({ searchText: e.target.value });
     };
 
     this.onSubmit = (e) => {
@@ -19,10 +21,8 @@ class SearchForm extends Component {
       let path = `/results/${this.state.searchText}`;
       this.props.searchTags(this.state.searchText);
       this.props.history.push(path);
-      this.setState({searchText: ''});
     };
   }
-
 
   render() {
     return (
@@ -40,7 +40,7 @@ class SearchForm extends Component {
             id='submit'
             className='search-button'
           >
-            <MdImageSearch />
+            <MdImageSearch className='search-icon' />
           </button>
         </form>
       </div>

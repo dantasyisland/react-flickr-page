@@ -1,7 +1,11 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-export default function MainNav({searchCats, searchCoding, searchMeditation}) {
+export default function MainNav({
+  searchCats,
+  searchCoding,
+  searchMeditation,
+}) {
   return (
     <nav className='main-nav'>
       <ul>

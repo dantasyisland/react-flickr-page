@@ -1,13 +1,15 @@
 body {
   text-align: center;
   font-family: 'Open Sans', sans-serif;
-  color: #3f4850;
+  background-color: rgba(30, 143, 255, 0.446);
+  color: #fff;
 }
 
 h2 {
   font-size: 2em;
   margin: 52px 0 40px;
   text-transform: capitalize;
+  color: black;
 }
 
 ul {
@@ -24,22 +26,26 @@ a {
   display: flex;
   margin: 0 auto 32px;
 }
-
+/* HERE */
 .search-form button {
   outline: none;
-  background-color: #438bbd;
-  border: none;
+  background-color: #edeff0;
+  border: 2px solid #000000;
   padding: 0px 15px;
   border-radius: 0 0.35em 0.35em 0;
   cursor: pointer;
 }
-
+/* Here */
+.search-icon {
+  font-size: 2em;
+}
+/* Here */
 input {
   font-size: 1em;
   width: 100%;
   background-color: #edeff0;
   padding: 10px 15px;
-  border: 3px solid #d7dbdf;
+  border: 2px solid #000000;
   border-right: none;
   border-radius: 0.35em 0 0 0.35em;
   outline: none;
@@ -50,12 +56,14 @@ input {
   margin-bottom: 1em;
 }
 
+/* Custom CSS for navlinks */
 .main-nav a {
   display: block;
-  background: #438bbd;
+  background: #b4d1fa;
   border-radius: 3px;
+  border: 2px solid black;
   padding: 5px;
-  color: #fff;
+  color: rgb(0, 0, 0);
 }
 
 .main-nav .active,
@@ -77,17 +85,25 @@ input {
   height: 165px;
   overflow: hidden;
   margin-bottom: 15px;
+  border: 2px solid black;
+  border-radius: 40px;
+}
+
+.photo-container ul li:hover {
+  width: 240px;
+  height: 185px;
+  transition: height 0.6s, width 0.6s;
 }
 
 .photo-container ul img {
   width: 100%;
   height: 100%;
   transform: scale(1);
-  transition: transform 0.4s;
+  transition: transform 0.7s;
 }
 
 .photo-container li:hover img {
-  transform: scale(1.9);
+  transform: scale(1.2);
 }
 
 .photo-container .not-found {

@@ -26,7 +26,7 @@ a {
   display: flex;
   margin: 0 auto 32px;
 }
-/* HERE */
+
 .search-form button {
   outline: none;
   background-color: #edeff0;
@@ -35,11 +35,11 @@ a {
   border-radius: 0 0.35em 0.35em 0;
   cursor: pointer;
 }
-/* Here */
+
 .search-icon {
   font-size: 2em;
 }
-/* Here */
+
 input {
   font-size: 1em;
   width: 100%;
@@ -56,7 +56,6 @@ input {
   margin-bottom: 1em;
 }
 
-/* Custom CSS for navlinks */
 .main-nav a {
   display: block;
   background: #bdd4f4;

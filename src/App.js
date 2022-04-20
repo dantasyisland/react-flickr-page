@@ -22,6 +22,7 @@ class App extends Component {
       query: '',
     };
 
+    // Function that retrieves data via axios
     this.searchTags = (query) => {
       this.setState({ query });
       const getPics = async () => {
@@ -44,11 +45,14 @@ class App extends Component {
       getPics();
     };
   }
+
+  // When app mounts - cat photos are displayed first
   componentDidMount() {
     document.title = 'React Flickr Page';
     this.searchTags('cats');
   }
 
+  // Logic for handling navigation in browser.
   componentDidUpdate(prevProps, prevState) {
     document.title = `React Flickr Page - ${this.state.query}`;
     if (prevProps.location.pathname !== this.props.location.pathname) {
@@ -71,7 +75,7 @@ class App extends Component {
           searchCoding={() => this.searchTags('coding')}
           searchMeditation={() => this.searchTags('meditation')}
         />
-
+        {/* Logic handles whether to display PhotoContainer component, a NoMatch component based on results or an Error component */}
         <SearchForm searchTags={this.searchTags} history={this.props.history} />
         <Switch>
           <Route exact path='/'>

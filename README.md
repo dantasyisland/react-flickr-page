@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# React Flickr Page
+
+This project uses React to display photos from flickr. Clicking a link will display 24 photos. Users can also search flickr. Data is retrieved via axios.
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

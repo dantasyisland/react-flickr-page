@@ -9,6 +9,7 @@ import MainNav from './components/MainNav';
 import PhotoContainer from './components/PhotoContainer';
 import NotFound from './components/NotFound';
 import Error from './components/Error';
+import NoMatch from './components/NoMatch';
 
 class App extends Component {
   constructor(props) {
@@ -75,11 +76,15 @@ class App extends Component {
         <Switch>
           <Route exact path='/'>
             {!this.state.isError ? (
-              <PhotoContainer
-                isLoading={this.state.isLoading}
-                flickrData={this.state.galleryData}
-                query={this.state.query}
-              />
+              this.state.galleryData.length !== 0 ? (
+                <PhotoContainer
+                  isLoading={this.state.isLoading}
+                  flickrData={this.state.galleryData}
+                  query={this.state.query}
+                />
+              ) : (
+                <NoMatch />
+              )
             ) : (
               <Error />
             )}
@@ -87,11 +92,15 @@ class App extends Component {
 
           <Route exact path='/results/:search'>
             {!this.state.isError ? (
-              <PhotoContainer
-                isLoading={this.state.isLoading}
-                flickrData={this.state.galleryData}
-                query={this.state.query}
-              />
+              this.state.galleryData.length !== 0 ? (
+                <PhotoContainer
+                  isLoading={this.state.isLoading}
+                  flickrData={this.state.galleryData}
+                  query={this.state.query}
+                />
+              ) : (
+                <NoMatch />
+              )
             ) : (
               <Error />
             )}

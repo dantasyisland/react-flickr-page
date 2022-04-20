@@ -59,7 +59,7 @@ input {
 /* Custom CSS for navlinks */
 .main-nav a {
   display: block;
-  background: #b4d1fa;
+  background: #bdd4f4;
   border-radius: 3px;
   border: 2px solid black;
   padding: 5px;
@@ -69,7 +69,8 @@ input {
 .main-nav .active,
 .main-nav a:hover,
 .search-form button:hover {
-  background-color: #275270;
+  background-color: #0081dd;
+  color: rgb(255, 255, 255);
 }
 
 .photo-container ul {

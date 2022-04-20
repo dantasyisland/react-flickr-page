@@ -49,12 +49,12 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    document.title = `React Flickr Page - ${this.state.query}`;
     if (prevProps.location.pathname !== this.props.location.pathname) {
       let currentLocation = this.props.location.pathname;
       currentLocation = currentLocation.replace(/\/results\//, '');
 
       if (this.props.location.pathname === '/') {
-        console.log('ONE STEP AWAY!!!');
         this.searchTags('cats');
       } else {
         this.searchTags(currentLocation);
@@ -68,7 +68,7 @@ class App extends Component {
         <MainNav
           searchCats={() => this.searchTags('cats')}
           searchCoding={() => this.searchTags('coding')}
-          searchZen={() => this.searchTags('zen')}
+          searchMeditation={() => this.searchTags('meditation')}
         />
 
         <SearchForm searchTags={this.searchTags} history={this.props.history} />

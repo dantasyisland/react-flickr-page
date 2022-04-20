@@ -1,7 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-export default function MainNav({ searchCats, searchCoding, searchZen }) {
+export default function MainNav({
+  searchCats,
+  searchCoding,
+  searchMeditation,
+}) {
   return (
     <nav className='main-nav'>
       <ul>
@@ -16,8 +20,8 @@ export default function MainNav({ searchCats, searchCoding, searchZen }) {
           </NavLink>
         </li>
         <li>
-          <NavLink to='/results/zen' onClick={searchZen}>
-            Zen
+          <NavLink to='/results/meditation' onClick={searchMeditation}>
+            Meditation
           </NavLink>
         </li>
       </ul>

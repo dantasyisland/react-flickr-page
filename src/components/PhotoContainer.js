@@ -3,6 +3,9 @@ import Photo from './Photo';
 import loadingSpinner from '../loadingSpinner.gif';
 
 export default function PhotoContainer({ flickrData, isLoading, query }) {
+  if (flickrData.length === 0) {
+    console.log('empty');
+  }
   let photos = flickrData.map((flickrPic) => {
     return (
       <Photo

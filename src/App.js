@@ -55,7 +55,6 @@ class App extends Component {
       currentLocation = currentLocation.replace(/\/results\//, '');
 
       if (this.props.location.pathname === '/') {
-        console.log('ONE STEP AWAY!!!');
         this.searchTags('cats');
       } else {
         this.searchTags(currentLocation);
